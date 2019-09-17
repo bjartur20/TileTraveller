@@ -1,16 +1,23 @@
 # Authors: Bjartur Þórhallsson, Guðjón Ingi Valdimarsson
 # Date: 17.09.2019
 
+# https://github.com/bjartur20/TileTraveller/
+
 '''
 1. Calculate which directions are available to the player.
 2. Print available directions.
 3. Get a direction from the player.
 4. Move the player accordingly, if the direction is unavailable ask for a new direction.
-6. Repeat until the player's position is at 3,1.
+6. Repeat until the player's position_int is at 3,1.
 7. Print a winning message and close the program.
 '''
 
-def get_available_directions (pos):
+def get_available_directions (position_int):
+    '''
+        Generates available positions for the player and returns them as a string of n,s,w or e in a single string.
+        Takes in the position_int as an int and returns available directions as a string.
+    '''
+    pos = position_int
     if pos == 11:
         return "n"
     elif pos == 12:
@@ -30,30 +37,42 @@ def get_available_directions (pos):
     else:
         print("Error, pos not defined.")
 
-def get_move(position):
-    user_input = input("Direction: ").lower()
+def get_move(position_int):
+    '''
+        Asks for input from the user (which direction he chooses to move) and returns the input as a string.
+        Takes in the position_int as an int and returns the user's input as a lowercase string.
+    '''
+    user_input_str = input("Direction: ").lower()
 
-    while user_input not in get_available_directions(position):
+    while user_input_str not in get_available_directions(position_int):
         print ("Not a valid direction!")
-        user_input = input("Direction: ").lower()
+        user_input_str = input("Direction: ").lower()
 
-    return user_input
+    return user_input_str
 
-def change_position(move, position):
-    if move == "n":
-        position += 1
-    elif move == "s":
-        position -= 1
-    elif move == "e":
-        position += 10
-    elif move == "w":
-        position -= 10
+def change_position(move_str, position_int):
+    '''
+        Changes the user position_int based on his input.
+        Takes in the user's move as a string and his position_int as an int and returns the user's new position_int as an int.
+    '''
+    if move_str == "n":
+        position_int += 1
+    elif move_str == "s":
+        position_int -= 1
+    elif move_str == "e":
+        position_int += 10
+    elif move_str == "w":
+        position_int -= 10
     else:
         print("Move input not defined")
 
-    return position
+    return position_int
 
 def get_direction(direction_str):
+    '''
+        Translates a single character into it's designated direction.
+        Takes in a string and returns a string.
+    '''
     if direction_str == "n":
         return "(N)orth"
     elif direction_str == "e":
@@ -65,22 +84,26 @@ def get_direction(direction_str):
     else:
         print ("Error in print_direction")
 
-def print_available_driections(avaialable_directions):
-    if len(avaialable_directions) == 1:
-        print("You can travel: {}.".format(get_direction(avaialable_directions)))
-    elif len(avaialable_directions) ==  2:
-        print("You can travel: {} or {}.".format(get_direction(avaialable_directions[0]), get_direction(avaialable_directions[1])))
-    elif len(avaialable_directions) == 3:
-        print("You can travel: {} or {} or {}.".format(get_direction(avaialable_directions[0]), get_direction(avaialable_directions[1]), get_direction(avaialable_directions[2])))
+def print_available_driections(avaialable_directions_str):
+    '''
+        Prints the available directions which the user can travel in.
+        Takes in the available directions as a string and prints directions to the user.
+    '''
+    if len(avaialable_directions_str) == 1:
+        print("You can travel: {}.".format(get_direction(avaialable_directions_str)))
+    elif len(avaialable_directions_str) ==  2:
+        print("You can travel: {} or {}.".format(get_direction(avaialable_directions_str[0]), get_direction(avaialable_directions_str[1])))
+    elif len(avaialable_directions_str) == 3:
+        print("You can travel: {} or {} or {}.".format(get_direction(avaialable_directions_str[0]), get_direction(avaialable_directions_str[1]), get_direction(avaialable_directions_str[2])))
 
 
 def main():
-    position = 11
-    while position != 31:
-        available_moves = get_available_directions(position)
-        print_available_driections(available_moves)
-        user_move = get_move(position)
-        position = change_position(user_move, position)
+    position_int = 11                                                   # Initial position
+    while position_int != 31:                                           # Runs until the user gets to the end position
+        available_moves_str = get_available_directions(position_int)
+        print_available_driections(available_moves_str)
+        user_move_str = get_move(position_int)
+        position_int = change_position(user_move_str, position_int)
     print ("Victory!")
     
 main()
