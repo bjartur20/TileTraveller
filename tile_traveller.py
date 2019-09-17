@@ -30,8 +30,12 @@ def get_available_directions (pos):
     else:
         print("Error, pos not defined.")
 
-def get_move(position, available_directions):
-    return
+def get_move(position):
+    user_input = input("Direction: ").lower()
+    while user_input not in get_available_directions(position):
+        print ("Not a valid direction!")
+        user_input = input("Direction: ").lower()
+    return user_input
 
 def change_position(move, position):
     return position
@@ -45,7 +49,7 @@ def main():
     while position != 31:
         available_moves = get_available_directions(position)
         print_available_driections(available_moves)
-        user_move = get_move(position, available_moves)
+        user_move = get_move(position)
         position = change_position(user_move, position)
 
 main()
