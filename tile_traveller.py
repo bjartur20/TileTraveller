@@ -44,7 +44,7 @@ def change_position(move, position):
         position += 1
     elif move == "s":
         position -= 1
-    elif move == "a":
+    elif move == "e":
         position += 10
     elif move == "w":
         position -= 10
@@ -53,7 +53,7 @@ def change_position(move, position):
 
     return position
 
-def print_direction(direction_str):
+def get_direction(direction_str):
     if direction_str == "n":
         return "(N)orth"
     elif direction_str == "e":
@@ -67,11 +67,11 @@ def print_direction(direction_str):
 
 def print_available_driections(avaialable_directions):
     if len(avaialable_directions) == 1:
-        print("You can travel: {}.".format(print_direction(avaialable_directions)))
+        print("You can travel: {}.".format(get_direction(avaialable_directions)))
     elif len(avaialable_directions) ==  2:
-        print("You can travel: {} or {}.".format(print_available_driections(avaialable_directions[0]), print_available_driections(avaialable_directions[1])))
+        print("You can travel: {} or {}.".format(get_direction(avaialable_directions[0]), get_direction(avaialable_directions[1])))
     elif len(avaialable_directions) == 3:
-        print("You can travel: {} or {} or {}.".format(print_available_driections(avaialable_directions[0]), print_available_driections(avaialable_directions[1]), print_direction(avaialable_directions[2])))
+        print("You can travel: {} or {} or {}.".format(get_direction(avaialable_directions[0]), get_direction(avaialable_directions[1]), get_direction(avaialable_directions[2])))
 
 
 def main():
@@ -81,5 +81,6 @@ def main():
         print_available_driections(available_moves)
         user_move = get_move(position)
         position = change_position(user_move, position)
-
+    print ("Victory!")
+    
 main()
