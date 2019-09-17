@@ -66,7 +66,12 @@ def print_direction(direction_str):
         print ("Error in print_direction")
 
 def print_available_driections(avaialable_directions):
-    print()
+    if len(avaialable_directions) == 1:
+        print("You can travel: {}.".format(print_direction(avaialable_directions)))
+    elif len(avaialable_directions) ==  2:
+        print("You can travel: {} or {}.".format(print_available_driections(avaialable_directions[0]), print_available_driections(avaialable_directions[1])))
+    elif len(avaialable_directions) == 3:
+        print("You can travel: {} or {} or {}.".format(print_available_driections(avaialable_directions[0]), print_available_driections(avaialable_directions[1]), print_direction(avaialable_directions[2])))
 
 
 def main():
