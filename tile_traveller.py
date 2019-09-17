@@ -32,12 +32,25 @@ def get_available_directions (pos):
 
 def get_move(position):
     user_input = input("Direction: ").lower()
+
     while user_input not in get_available_directions(position):
         print ("Not a valid direction!")
         user_input = input("Direction: ").lower()
+
     return user_input
 
 def change_position(move, position):
+    if move == "n":
+        position += 1
+    elif move == "s":
+        position -= 1
+    elif move == "a":
+        position += 10
+    elif move == "w":
+        position -= 10
+    else:
+        print("Move input not defined")
+
     return position
 
 def print_available_driections(avaialable_directions):
