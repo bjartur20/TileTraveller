@@ -10,4 +10,23 @@
 7. Print a winning message and close the program.
 '''
 
-""" Testing git push on computer 2 """
+def get_available_directions (position):
+    return available_directions
+
+def get_move(position, available_directions):
+    return move
+
+def change_position(move, position):
+    return position
+
+def print_available_driections(avaialable_directions):
+    print()
+
+
+def main():
+    position = 11
+    while position != 31:
+        available_moves = get_available_directions(position)
+        print_available_driections(available_moves)
+        user_move = get_move(position, available_moves)
+        position = change_position(user_move, position)
