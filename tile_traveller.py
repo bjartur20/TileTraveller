@@ -26,7 +26,7 @@ def get_available_directions (pos):
     elif pos == 32:
         return "ns"
     elif pos == 33:
-        return "ws"
+        return "sw"
     else:
         print("Error, pos not defined.")
 
@@ -52,6 +52,18 @@ def change_position(move, position):
         print("Move input not defined")
 
     return position
+
+def print_direction(direction_str):
+    if direction_str == "n":
+        return "(N)orth"
+    elif direction_str == "e":
+        return "(E)ast"
+    elif direction_str == "s":
+        return "(S)outh"
+    elif direction_str == "w":
+        return "(W)est"
+    else:
+        print ("Error in print_direction")
 
 def print_available_driections(avaialable_directions):
     print()
