@@ -1,5 +1,5 @@
 # Authors: Bjartur Þórhallsson, Guðjón Ingi Valdimarsson
-# Date: 17.09.2019
+# Date: 08.10.2019
 
 # https://github.com/bjartur20/TileTraveller/
 
@@ -112,7 +112,7 @@ def pull_lever(coins_int, position_int):
 
 def play():
     ''' Plays the game allowing it to be played multiple times '''
-    
+
     position_int = 11                                                   # Initial position
     coins_int = 0
     while position_int != 31:                                           # Runs until the user gets to the end position
