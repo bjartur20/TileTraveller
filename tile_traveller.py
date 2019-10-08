@@ -12,6 +12,8 @@
 7. Print a winning message and close the program.
 '''
 
+import random
+
 def get_available_directions (position_int):
     '''
         Generates available positions for the player and returns them as a string of n,s,w or e in a single string.
@@ -37,20 +39,25 @@ def get_available_directions (position_int):
     else:
         print("Error, pos not defined.")
 
-def get_move(position_int):
+def get_move(position_int, move_count):
     '''
         Asks for input from the user (which direction he chooses to move) and returns the input as a string.
         Takes in the position_int as an int and returns the user's input as a lowercase string.
     '''
     print_available_driections(get_available_directions(position_int))
-    user_input_str = input("Direction: ").lower()
+    user_input_str = get_random_move()
+    print ("Direction: {}".format(user_input_str))
+    move_count += 1
 
     while user_input_str not in get_available_directions(position_int):
         print ("Not a valid direction!")
         print_available_driections(get_available_directions(position_int))
-        user_input_str = input("Direction: ").lower()
+        user_input_str = get_random_move()
+        print ("Direction: {}".format(user_input_str))
+        move_count += 1
 
-    return user_input_str
+
+    return user_input_str, move_count
 
 def change_position(move_str, position_int):
     '''
@@ -103,23 +110,36 @@ def pull_lever(coins_int, position_int):
 
     lever_list = (12, 22, 23, 32)                                       # Positions of leavers.
     if position_int in lever_list:
-        pull_lever_input = input("Pull a lever (y/n): ").lower()        
+        pull_lever_input = get_random_decision()
+        print ("Pull a lever (y/n): {}".format(pull_lever_input))       
         if pull_lever_input == "y":                                     # When the user wants to pull a leaver change the coin value.
             coins_int += 1
             print ("You received 1 coin, your total is now {}.".format(coins_int))
     
     return coins_int
 
+def get_random_move():
+    directions_list = ["n", "e", "s", "w"]
+    move = random.choice(directions_list)
+    return move
+
+def get_random_decision():
+    decisions_list = ["y", "n"]
+    decision = random.choice(decisions_list)
+    return decision
+
 def play():
-    ''' Plays the game allowing it to be played multiple times '''
+    ''' Plays the game allowing it to be played multiple times, Also holds coin and move values '''
 
     position_int = 11                                                   # Initial position
     coins_int = 0
+    move_count = 0
+    random.seed(int(input("Input seed: ")))
     while position_int != 31:                                           # Runs until the user gets to the end position
-        user_move_str = get_move(position_int)
+        user_move_str, move_count = get_move(position_int, move_count)
         position_int = change_position(user_move_str, position_int)
         coins_int = pull_lever(coins_int, position_int)
-    print ("Victory! Total coins {}.".format(coins_int))
+    print ("Victory! Total coins {}. Valid moves {}.".format(coins_int, move_count))
     
 
 def main():
