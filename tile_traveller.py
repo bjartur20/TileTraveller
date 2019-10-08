@@ -110,7 +110,7 @@ def pull_lever(coins_int, position_int):
     
     return coins_int
 
-def main():
+def play():
     position_int = 11                                                   # Initial position
     coins_int = 0
     while position_int != 31:                                           # Runs until the user gets to the end position
@@ -119,4 +119,11 @@ def main():
         coins_int = pull_lever(coins_int, position_int)
     print ("Victory! Total coins {}.".format(coins_int))
     
+
+def main():
+    user_input = "y"
+    while user_input == "y":
+        play()
+        user_input = input("Play again (y/n): ").lower()
+
 main()
