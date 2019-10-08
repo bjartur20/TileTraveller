@@ -42,10 +42,12 @@ def get_move(position_int):
         Asks for input from the user (which direction he chooses to move) and returns the input as a string.
         Takes in the position_int as an int and returns the user's input as a lowercase string.
     '''
+    print_available_driections(get_available_directions(position_int))
     user_input_str = input("Direction: ").lower()
 
     while user_input_str not in get_available_directions(position_int):
         print ("Not a valid direction!")
+        print_available_driections(get_available_directions(position_int))
         user_input_str = input("Direction: ").lower()
 
     return user_input_str
@@ -96,14 +98,23 @@ def print_available_driections(avaialable_directions_str):
     elif len(avaialable_directions_str) == 3:
         print("You can travel: {} or {} or {}.".format(get_direction(avaialable_directions_str[0]), get_direction(avaialable_directions_str[1]), get_direction(avaialable_directions_str[2])))
 
+def pull_lever(coins_int, position_int):
+    lever_list = (12, 22, 23, 32)
+    if position_int in lever_list:
+        pull_lever_input = input("Pull lever (y/n): ").lower()
+        if pull_lever_input == "y":
+            coins_int += 1
+            print ("You received 1 coin, your total is now {}.".format(coins_int))
+    return coins_int
 
 def main():
     position_int = 11                                                   # Initial position
+    coins_int = 0
     while position_int != 31:                                           # Runs until the user gets to the end position
         available_moves_str = get_available_directions(position_int)
-        print_available_driections(available_moves_str)
         user_move_str = get_move(position_int)
         position_int = change_position(user_move_str, position_int)
-    print ("Victory!")
+        coins_int = pull_lever(coins_int, position_int)
+    print ("Victory! Total coins {}.".format(coins_int))
     
 main()
