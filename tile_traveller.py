@@ -16,9 +16,10 @@ import random
 
 def get_available_directions (position_int):
     '''
-        Generates available positions for the player and returns them as a string of n,s,w or e in a single string.
-        Takes in the position_int as an int and returns available directions as a string.
+    Generates available positions for the player and returns them as a string of n,s,w or e in a single string.
+    Takes in the position_int as an int and returns available directions as a string.
     '''
+
     pos = position_int
     if pos == 11:
         return "n"
@@ -41,9 +42,10 @@ def get_available_directions (position_int):
 
 def get_move(position_int, move_count):
     '''
-        Asks for input from the user (which direction he chooses to move) and returns the input as a string.
-        Takes in the position_int as an int and returns the user's input as a lowercase string.
+    Asks for input from the user (which direction he chooses to move) and returns the input as a string.
+    Takes in the position_int as an int and returns the user's input as a lowercase string.
     '''
+
     print_available_driections(get_available_directions(position_int))
     user_input_str = get_random_move()
     print ("Direction: {}".format(user_input_str))
@@ -62,8 +64,10 @@ def get_move(position_int, move_count):
 def change_position(move_str, position_int):
     '''
         Changes the user position_int based on his input.
-        Takes in the user's move as a string and his position_int as an int and returns the user's new position_int as an int.
+        Takes in the user's move as a string and his position_int 
+        as an int and returns the user's new position_int as an int.
     '''
+
     if move_str == "n":
         position_int += 1
     elif move_str == "s":
@@ -79,9 +83,10 @@ def change_position(move_str, position_int):
 
 def get_direction(direction_str):
     '''
-        Translates a single character into it's designated direction.
-        Takes in a string and returns a string.
+    Translates a single character into it's designated direction.
+    Takes in a string and returns a string.
     '''
+
     if direction_str == "n":
         return "(N)orth"
     elif direction_str == "e":
@@ -95,9 +100,10 @@ def get_direction(direction_str):
 
 def print_available_driections(avaialable_directions_str):
     '''
-        Prints the available directions which the user can travel in.
-        Takes in the available directions as a string and prints directions to the user.
+    Prints the available directions which the user can travel in.
+    Takes in the available directions as a string and prints directions to the user.
     '''
+
     if len(avaialable_directions_str) == 1:
         print("You can travel: {}.".format(get_direction(avaialable_directions_str)))
     elif len(avaialable_directions_str) ==  2:
@@ -119,17 +125,23 @@ def pull_lever(coins_int, position_int):
     return coins_int
 
 def get_random_move():
+    ''' Generates a random move. '''
+
     directions_list = ["n", "e", "s", "w"]
     move = random.choice(directions_list)
+
     return move
 
 def get_random_decision():
+    ''' Generates a random decision for leavers. '''
+
     decisions_list = ["y", "n"]
     decision = random.choice(decisions_list)
+
     return decision
 
 def play():
-    ''' Plays the game allowing it to be played multiple times, Also holds coin and move values '''
+    ''' Plays the game allowing it to be played multiple times, Also holds coin and move values. '''
 
     position_int = 11                                                   # Initial position
     coins_int = 0
@@ -139,7 +151,7 @@ def play():
         user_move_str, move_count = get_move(position_int, move_count)
         position_int = change_position(user_move_str, position_int)
         coins_int = pull_lever(coins_int, position_int)
-    print ("Victory! Total coins {}. Valid moves {}.".format(coins_int, move_count))
+    print ("Victory! Total coins {}. Moves {}.".format(coins_int, move_count))
     
 
 def main():
