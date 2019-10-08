@@ -99,19 +99,21 @@ def print_available_driections(avaialable_directions_str):
         print("You can travel: {} or {} or {}.".format(get_direction(avaialable_directions_str[0]), get_direction(avaialable_directions_str[1]), get_direction(avaialable_directions_str[2])))
 
 def pull_lever(coins_int, position_int):
-    lever_list = (12, 22, 23, 32)
+    ''' Changes the coin value when the user wants to pull a leaver. '''
+
+    lever_list = (12, 22, 23, 32)                                       # Positions of leavers.
     if position_int in lever_list:
-        pull_lever_input = input("Pull lever (y/n): ").lower()
-        if pull_lever_input == "y":
+        pull_lever_input = input("Pull a lever (y/n): ").lower()        
+        if pull_lever_input == "y":                                     # When the user wants to pull a leaver change the coin value.
             coins_int += 1
             print ("You received 1 coin, your total is now {}.".format(coins_int))
+    
     return coins_int
 
 def main():
     position_int = 11                                                   # Initial position
     coins_int = 0
     while position_int != 31:                                           # Runs until the user gets to the end position
-        available_moves_str = get_available_directions(position_int)
         user_move_str = get_move(position_int)
         position_int = change_position(user_move_str, position_int)
         coins_int = pull_lever(coins_int, position_int)
